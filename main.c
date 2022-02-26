@@ -8,10 +8,18 @@ char*	ft_strcpy(char* dest, char* src);
 int main(int ac, char **av)
 {
 	(void) ac;
-	ft_write(1, av[1], ft_strlen(av[1]));
+
+	// ==== TESTS de FT_STRLEN ====
+	printf("Taille '%s': %d\n", "test", (int) ft_strlen("test"));
+
+	// ==== TESTS de FT_WRITE ====
+	char* msg = "test\n";
+	ft_write(1, msg, ft_strlen(msg));
+
+	// ==== TESTS de FT_STRCPY ====
 	char* src = "test";
 	char* dest = "hello";
-	dest = ft_strcpy(dest, src);
-	printf("%s", dest);
+	ft_strcpy(dest, src);
+	printf("%s\n", dest);
 	return 0;
 }
