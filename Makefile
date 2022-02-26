@@ -1,18 +1,68 @@
-NAME	:= libasm
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: acoezard <acoezard@student.42nice.fr>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/02/26 23:44:28 by acoezard          #+#    #+#              #
+#    Updated: 2022/02/26 23:47:24 by acoezard         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-ASM		:= nasm
-CC		:= clang
+NAME	:=	libasm.a
+
+# -----------------------------------------------------------------------------
+# COMPILATION
+# -----------------------------------------------------------------------------
+SRCS	:=	ft_write.s \
+			ft_strlen.s \
+			ft_strcpy.s
+
+OBJS	:=	${addprefix bin/, ${SRCS:.s=.o}}
+
+ASM		:=	nasm
+CC		:=	clang
+
+OS = $(shell uname -s)
+ifeq ($(OS), Linux)
+ASM_FLAGS	:= -f elf64
+else
+ASM_FLAGS	:= -f macho64
+endif
+
+# -----------------------------------------------------------------------------
+# COLORS
+# -----------------------------------------------------------------------------
+__RED		:=	"\033[1;31m"
+__GREEN		:=	"\033[1;32m"
+__YELLOW	:=	"\033[1;33m"
+__BLUE		:=	"\033[1;36m"
+__WHITE		:=	"\033[1;37m"
+__EOC		:=	"\033[0;0m"
+
+# -----------------------------------------------------------------------------
+# RULES
+# -----------------------------------------------------------------------------
+bin/%.o: %.s
+	@mkdir -p ${dir $@}
+	@${ASM} ${ASM_FLAGS} $? -o $@
+	@echo ${__GREEN}"Compiling "${__WHITE}$?${__EOC}
 
 all: ${NAME}
 
-${NAME}:
-	${ASM} -f macho64 ft_strlen.s
-	${ASM} -f macho64 ft_write.s
-	${CC} main.c ft_strlen.o ft_write.o -o ${NAME}
+${NAME}: ${OBJS}
+	@ar rcs ${NAME} ${OBJS}
+	@${CC} main.c ${NAME}
+	@echo ${__GREEN}"Finished "${__WHITE}${NAME}" library target"${__EOC}
 
 clean:
-	rm ft_strlen.o libasm
+	@rm -rf bin/
 
-re: clean all
+fclean: clean
+	@rm -rf ${NAME} a.out
+	@echo ${__BLUE}"Cleaned "${__WHITE}"bin target(s)"${__EOC}
 
-.PHONY: all re clean
+re: fclean all
+
+.PHONY: all clean fclean re
