@@ -6,7 +6,7 @@ _ft_strcpy:
 
 _begin:
 	cmp 	byte [rsi + rcx], 0x0
-	jz		_end
+	je		_end
 	mov 	cl, [rsi + rcx]
 	mov 	[rdi + rcx], cl
 	inc 	rcx
