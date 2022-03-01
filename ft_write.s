@@ -10,9 +10,9 @@ _ft_write:
 	ret
 
 _error:
-	;neg		rax
-	;mov		rdi, rax
+	;neg	rax
+	;mov	rdi, rax
 	;call	__errno_location
-	;mov		[rax], rdi
-	;mov		rax, -1
+	;mov	[rax], rdi
+	;mov	rax, -1
 	ret
