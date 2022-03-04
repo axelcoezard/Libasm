@@ -3,6 +3,7 @@ section .text
 
 _ft_strcpy:
 	xor		rax, rax
+	xor		cl, cl
 	jmp		_begin
 
 _begin:
