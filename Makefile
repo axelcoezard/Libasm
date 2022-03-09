@@ -6,7 +6,7 @@
 #    By: acoezard <acoezard@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/26 23:44:28 by acoezard          #+#    #+#              #
-#    Updated: 2022/03/04 15:01:55 by acoezard         ###   ########.fr        #
+#    Updated: 2022/03/09 10:52:46 by acoezard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ __EOC		:=	"\033[0;0m"
 # -----------------------------------------------------------------------------
 # RULES
 # -----------------------------------------------------------------------------
-bin/%.o: %.s
+bin/%.o: srcs/%.s
 	@mkdir -p ${dir $@}
 	@${ASM} ${ASM_FLAGS} $? -o $@
 	@echo ${__GREEN}"Compiling "${__WHITE}$?${__EOC}
@@ -54,7 +54,7 @@ all: ${NAME}
 
 ${NAME}: ${OBJS}
 	@ar rcs ${NAME} ${OBJS}
-	@${CC} main.c ${NAME}
+	@${CC} srcs/main.c ${NAME}
 	@echo ${__GREEN}"Finished "${__WHITE}${NAME}" library target"${__EOC}
 
 clean:
