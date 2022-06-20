@@ -6,7 +6,7 @@
 #    By: acoezard <acoezard@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/26 23:44:28 by acoezard          #+#    #+#              #
-#    Updated: 2022/03/09 10:52:46 by acoezard         ###   ########.fr        #
+#    Updated: 2022/06/20 10:58:31 by acoezard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ NAME	:=	libasm.a
 SRCS	:=	ft_write.s \
 			ft_strlen.s \
 			ft_strcpy.s \
-			ft_strcmp.s
+			ft_strcmp.s \
+			ft_read.s
 
 OBJS	:=	${addprefix bin/, ${SRCS:.s=.o}}
 
@@ -54,14 +55,14 @@ all: ${NAME}
 
 ${NAME}: ${OBJS}
 	@ar rcs ${NAME} ${OBJS}
-	@${CC} srcs/main.c ${NAME}
+	@${CC} -o tests/tester tests/tester.c ${NAME}
 	@echo ${__GREEN}"Finished "${__WHITE}${NAME}" library target"${__EOC}
 
 clean:
 	@rm -rf bin/
 
 fclean: clean
-	@rm -rf ${NAME} a.out
+	@rm -rf ${NAME} a.out tests/tester
 	@echo ${__BLUE}"Cleaned "${__WHITE}"bin target(s)"${__EOC}
 
 re: fclean all
