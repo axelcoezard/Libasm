@@ -6,7 +6,7 @@
 #    By: acoezard <acoezard@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/26 23:44:28 by acoezard          #+#    #+#              #
-#    Updated: 2022/06/20 10:58:31 by acoezard         ###   ########.fr        #
+#    Updated: 2022/06/20 11:48:42 by acoezard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,11 @@ NAME	:=	libasm.a
 # COMPILATION
 # -----------------------------------------------------------------------------
 SRCS	:=	ft_write.s \
+			ft_read.s \
 			ft_strlen.s \
 			ft_strcpy.s \
 			ft_strcmp.s \
-			ft_read.s
+			ft_strdup.s
 
 OBJS	:=	${addprefix bin/, ${SRCS:.s=.o}}
 

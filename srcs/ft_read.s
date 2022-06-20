@@ -10,9 +10,9 @@ _ft_read:
 
 _error:
 	mov		r15, rax
-	sub		rsp, 8
+	sub		rsp, 0x8
 	call	___error
-	add		rsp, 8
+	add		rsp, 0x8
 	mov		[rax], r15
 	mov		rax, -1
 	ret
